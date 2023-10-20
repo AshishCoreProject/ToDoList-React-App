@@ -1,21 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import AllOutIcon from "@mui/icons-material/AllOut";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Input,
-  Typography,
-} from "@mui/material";
+import TaskForm from "./components/TaskForm";
+import List from "./components/List";
+import { Box, Button, Typography } from "@mui/material";
 
 const Header = styled.div`
   color: #3e978b;
@@ -30,6 +18,7 @@ const BrandTitle = styled.h1`
 const Content = styled.div`
   display: flex;
   height: 800px;
+  padding-top: 10px;
   background-color: #fbffdc;
   flex-direction: column-reverse;
   justify-content: flex-end;
@@ -48,6 +37,12 @@ const FooterName = styled.p`
 
 function App() {
   const [isAddTask, setIsAddTask] = useState(false);
+  const [tasks, setTasks] = useState([]);
+
+  function handleAddTask(newTask) {
+    setTasks([...tasks, newTask]);
+    console.log(tasks);
+  }
   return (
     <>
       <Header className="header">
@@ -65,7 +60,12 @@ function App() {
 
       <Content>
         {isAddTask ? (
-          <TaskForm isAddTask={isAddTask} setIsAddTask={setIsAddTask} />
+          <TaskForm
+            isAddTask={isAddTask}
+            setIsAddTask={setIsAddTask}
+            handleAddTask={handleAddTask}
+            tasks={tasks}
+          />
         ) : (
           <Box>
             <Button
@@ -76,6 +76,7 @@ function App() {
             </Button>
           </Box>
         )}
+        <List tasks={tasks} />
       </Content>
 
       <Footer>
@@ -84,110 +85,5 @@ function App() {
     </>
   );
 }
-// eslint-disable-next-line react/prop-types
-function List({ title, description }) {
-  return (
-    <Box
-      sx={{
-        width: "500px",
-        height: "50px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        alignContent: "flex-start",
-        flexWrap: "nowrap",
-      }}
-    >
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              icon={<AllOutIcon />}
-              color="success"
-              checkedIcon={<CheckCircleIcon />}
-              size="small"
-            />
-          }
-          label={title}
-        />
-      </FormGroup>
-      <Box sx={{ marginLeft: "27px", width: "400px" }}>
-        <Typography variant="caption">{description}</Typography>
-      </Box>
-    </Box>
-  );
-}
 
-// eslint-disable-next-line react/prop-types
-function TaskForm({ isAddTask, setIsAddTask }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [isSubmit, setIsSubmit] = useState(false);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setIsSubmit((value) => !value);
-  }
-
-  return (
-    <>
-      <Card
-        sx={{
-          width: "500px",
-          height: "150px",
-          bgcolor: "#fbffdc",
-          borderWidth: "0px",
-        }}
-      >
-        <form onSubmit={handleSubmit}>
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Input
-              type="text"
-              placeholder="Task name"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-
-            <Input
-              type="text"
-              placeholder="Description"
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </CardContent>
-          <CardActions
-            sx={{
-              display: "flex",
-              justifyContent: "end",
-            }}
-          >
-            <Button color="success" onClick={() => setIsAddTask(!isAddTask)}>
-              Cancel
-            </Button>
-            <Button
-              sx={{
-                bgcolor: "#3e978b",
-                borderRadius: "10px",
-                "&:hover": {
-                  bgcolor: "#98eecc",
-                },
-              }}
-              size="small"
-              variant="contained"
-              type="submit"
-              disabled={!(title && description)}
-            >
-              <AddOutlinedIcon />
-            </Button>
-          </CardActions>
-        </form>
-      </Card>
-      {isSubmit && <List title={title} description={description} />}
-    </>
-  );
-}
 export default App;

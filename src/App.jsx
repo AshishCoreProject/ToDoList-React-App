@@ -44,7 +44,6 @@ function App() {
     setTasks([newTask, ...tasks]);
     console.log(tasks);
   }
-  console.log(tasks);
 
   function handleDeleteTask(id) {
     setTimeout(() => {
@@ -52,16 +51,20 @@ function App() {
     }, 300);
   }
 
-  // function editTask(id, newTitle, newDescription) {
-  //   setTasks(
-  //     tasks.map((task) => {
-  //       if (id === task.id) {
-  //         return [...task, { title: newTitle, description: newDescription }];
-  //       }
-  //       return task;
-  //     })
-  //   );
-  // }
+  function handleEditTask(myId, myTitle, myDescription) {
+    const newListItem = tasks.map((item) => {
+      if (item.id === myId) {
+        const updatedItem = {
+          ...item,
+          title: myTitle,
+          description: myDescription,
+        };
+        return updatedItem;
+      }
+      return item;
+    });
+    setTasks(newListItem);
+  }
 
   return (
     <>
@@ -105,6 +108,7 @@ function App() {
           tasks={tasks}
           deleteTask={handleDeleteTask}
           handleAddTask={handleAddTask}
+          handleEditTask={handleEditTask}
         />
       </Content>
 

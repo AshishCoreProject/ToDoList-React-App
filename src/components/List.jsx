@@ -1,9 +1,9 @@
-import { Box, Button } from "@mui/material";
+/* eslint-disable react/prop-types */
+import { Box } from "@mui/material";
 import ListElement from "./ListElement";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 // eslint-disable-next-line react/prop-types
-function List({ tasks, deleteTask }) {
+function List({ tasks, deleteTask, handleEditTask, handleAddTask }) {
   return (
     <>
       {tasks.map((task) => (
@@ -12,7 +12,7 @@ function List({ tasks, deleteTask }) {
             display: "flex",
             borderBottom: "1px inset  gray",
             borderRadius: "5px",
-            marginBottom: "5px",
+            marginBottom: "10px",
             boxShadow: "1px 1px 1px lightgray ",
           }}
           key={task.id}
@@ -21,12 +21,10 @@ function List({ tasks, deleteTask }) {
             id={task.id}
             title={task.title}
             description={task.description}
+            handleAddTask={handleAddTask}
             deleteTask={deleteTask}
+            handleEditTask={handleEditTask}
           />
-
-          <Button sx={{ color: "#00d08aba", fontWeight: 200 }}>
-            <BorderColorIcon color="black" />
-          </Button>
         </Box>
       ))}
     </>

@@ -1,15 +1,35 @@
+/* eslint-disable react/prop-types */
 import AllOutIcon from "@mui/icons-material/AllOut";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+} from "@mui/material";
+import TaskForm from "./TaskForm";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
-function ListElement({ id, title, description, deleteTask }) {
+function ListElement({
+  id,
+  title,
+  description,
+  deleteTask,
+  handleEditTask,
+  handleAddTask,
+}) {
+  let [openForm, setOpenForm] = useState(false);
+
   return (
     <Box
       key={id}
       sx={{
-        width: "440px",
-        height: "50px",
+        width: "600px",
+        // height: "50px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -18,18 +38,41 @@ function ListElement({ id, title, description, deleteTask }) {
         flexWrap: "nowrap",
       }}
     >
-      <FormControlLabel
-        control={
-          <Checkbox
-            icon={<AllOutIcon />}
-            color="success"
-            checkedIcon={<CheckCircleIcon />}
-            size="small"
-            onChange={() => deleteTask(id)}
-          />
-        }
-        label={title}
-      />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          width: "600px",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+        }}
+      >
+        <FormControlLabel
+          control={
+            <Checkbox
+              icon={<AllOutIcon />}
+              color="success"
+              checkedIcon={<CheckCircleIcon />}
+              // size="medium"
+              onChange={() => deleteTask(id)}
+            />
+          }
+          label={title}
+        />
+        <Button
+          onClick={() => setOpenForm((value) => !value)}
+          sx={{
+            color: "#00d08aba",
+            fontWeight: 200,
+            "&:hover": {
+              color: "#360982",
+              opacity: "80%",
+            },
+          }}
+        >
+          <BorderColorIcon />
+        </Button>
+      </Box>
       <Box
         sx={{
           position: "relative",
@@ -40,6 +83,18 @@ function ListElement({ id, title, description, deleteTask }) {
         }}
       >
         <Typography variant="caption">{description}</Typography>
+      </Box>
+      <Box sx={{ width: "300px" }}>
+        {openForm && (
+          <TaskForm
+            handleAddTask={handleAddTask}
+            handleEditTask={handleEditTask}
+            myId={id}
+            myTitle={title}
+            myDescription={description}
+            setOpenForm={setOpenForm}
+          />
+        )}
       </Box>
     </Box>
   );

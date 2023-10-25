@@ -1,29 +1,47 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Button, Card, CardActions, CardContent, Input } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
-// eslint-disable-next-line react/prop-types
-function TaskForm({ isAddTask, setIsAddTask, handleAddTask }) {
+function TaskForm({
+  isAddTask,
+  setIsAddTask,
+  handleAddTask,
+  handleEditTask,
+  myId,
+  myTitle,
+  myDescription,
+  setOpenForm,
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
   //   const [isSubmit, setIsSubmit] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     const id = Date.now().toString().slice(8, 12);
-    console.log(id);
-    const newTask = { id, title, description };
-    handleAddTask(newTask);
-    // setIsSubmit(true);
-    setDescription("");
-    setTitle("");
+    //Adding a Task
+    if (!myId) {
+      const newTask = { id, title, description };
+      handleAddTask(newTask, myId);
+      setDescription("");
+      setTitle("");
+    }
+
+    //Editing a Task
+
+    myTitle = title;
+    myDescription = description;
+    handleEditTask(myId, myTitle, myDescription);
+    setOpenForm((value) => !value);
   }
 
   return (
     <>
       <Card
         sx={{
-          width: "500px",
+          width: "600px",
           height: "150px",
           bgcolor: "#fbffdc",
           borderWidth: "0px",
@@ -59,8 +77,23 @@ function TaskForm({ isAddTask, setIsAddTask, handleAddTask }) {
             }}
           >
             <Button
-              sx={{ bgcolor: "#ACFFAD", color: "green", borderRadius: "10px" }}
-              onClick={() => setIsAddTask(!isAddTask)}
+              sx={{
+                bgcolor: "#ACFFAD",
+                color: "green",
+                borderRadius: "10px",
+                "&:hover": {
+                  color: "white",
+                  bgcolor: "#360982",
+                  opacity: "80%",
+                },
+              }}
+              onClick={() => {
+                // logic of if we edit the form it should be closed
+                if (!myId) {
+                  setIsAddTask(!isAddTask);
+                }
+                setOpenForm((value) => !value);
+              }}
             >
               Cancel
             </Button>
@@ -70,15 +103,16 @@ function TaskForm({ isAddTask, setIsAddTask, handleAddTask }) {
                 bgcolor: "#3e978b",
                 borderRadius: "10px",
                 "&:hover": {
-                  bgcolor: "#98eecc",
+                  bgcolor: "#360982",
+                  color: "white",
                 },
               }}
-              size="small"
+              // size="small"
               variant="contained"
               type="submit"
               disabled={!(title && description)}
             >
-              <AddOutlinedIcon />
+              {myId ? "Edit" : <AddOutlinedIcon />}
             </Button>
           </CardActions>
         </form>

@@ -1,60 +1,32 @@
-import AllOutIcon from "@mui/icons-material/AllOut";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Typography,
-} from "@mui/material";
+import { Box, Button } from "@mui/material";
+import ListElement from "./ListElement";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 
 // eslint-disable-next-line react/prop-types
-function List({ tasks }) {
-  console.log(tasks);
+function List({ tasks, deleteTask }) {
   return (
     <>
       {tasks.map((task) => (
         <Box
-          key={task.title}
           sx={{
-            width: "500px",
-            height: "50px",
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            alignContent: "flex-start",
-            flexWrap: "nowrap",
             borderBottom: "1px inset  gray",
             borderRadius: "5px",
             marginBottom: "5px",
-            boxShadow: "1px 1px 1px lightgray ;",
+            boxShadow: "1px 1px 1px lightgray ",
           }}
+          key={task.id}
         >
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  icon={<AllOutIcon />}
-                  color="success"
-                  checkedIcon={<CheckCircleIcon />}
-                  size="small"
-                />
-              }
-              label={task.title}
-            />
-            <Box
-              sx={{
-                position: "relative",
-                bottom: "10px",
-                color: "#6a6363",
-                marginLeft: "27px",
-                width: "400px",
-              }}
-            >
-              <Typography variant="caption">{task.description}</Typography>
-            </Box>
-          </FormGroup>
+          <ListElement
+            id={task.id}
+            title={task.title}
+            description={task.description}
+            deleteTask={deleteTask}
+          />
+
+          <Button sx={{ color: "#00d08aba", fontWeight: 200 }}>
+            <BorderColorIcon color="black" />
+          </Button>
         </Box>
       ))}
     </>

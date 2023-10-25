@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, Card, CardActions, CardContent, Input } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
-// eslint-disable-next-line react/prop-types
-function TaskForm({ isAddTask, setIsAddTask, handleAddTask }) {
+import { Button, Card, CardActions, CardContent, Input } from "@mui/material";
+
+function EditForm(isEdit, setIsEdit, handleAddTask) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   //   const [isSubmit, setIsSubmit] = useState(false);
@@ -60,7 +60,7 @@ function TaskForm({ isAddTask, setIsAddTask, handleAddTask }) {
           >
             <Button
               sx={{ bgcolor: "#ACFFAD", color: "green", borderRadius: "10px" }}
-              onClick={() => setIsAddTask(!isAddTask)}
+              onClick={() => setIsEdit(!isEdit)}
             >
               Cancel
             </Button>
@@ -88,4 +88,4 @@ function TaskForm({ isAddTask, setIsAddTask, handleAddTask }) {
   );
 }
 
-export default TaskForm;
+export default EditForm;

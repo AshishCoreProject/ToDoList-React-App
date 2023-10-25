@@ -4,3 +4,6 @@
 .header:hover {
   color: #54b435;
 }
+body {
+  margin-top: 0;
+}

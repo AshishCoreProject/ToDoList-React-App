@@ -10,7 +10,7 @@ const Header = styled.div`
   height: 50px;
   text-align: left;
   font-family: cursive;
-  background: #f0ff42;
+  background: #acffad;
 `;
 const BrandTitle = styled.h1`
   margin: 1px;
@@ -39,17 +39,42 @@ function App() {
   const [isAddTask, setIsAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
 
+  //Adding into the array.
   function handleAddTask(newTask) {
-    setTasks([...tasks, newTask]);
+    setTasks([newTask, ...tasks]);
     console.log(tasks);
   }
+  console.log(tasks);
+
+  function handleDeleteTask(id) {
+    setTimeout(() => {
+      setTasks(tasks.filter((task) => task.id !== id));
+    }, 300);
+  }
+
+  // function editTask(id, newTitle, newDescription) {
+  //   setTasks(
+  //     tasks.map((task) => {
+  //       if (id === task.id) {
+  //         return [...task, { title: newTitle, description: newDescription }];
+  //       }
+  //       return task;
+  //     })
+  //   );
+  // }
+
   return (
     <>
       <Header className="header">
         <div>
           <BrandTitle>
             <Typography
-              sx={{ color: " #3e978b", "&:hover": { color: "#54b435" } }}
+              sx={{
+                color: " #54436B",
+                "&:hover": { color: "#360982" },
+                fontFamily: "Montserrat",
+                fontWeight: "600",
+              }}
               variant="h5"
             >
               ToDo List App
@@ -76,7 +101,11 @@ function App() {
             </Button>
           </Box>
         )}
-        <List tasks={tasks} />
+        <List
+          tasks={tasks}
+          deleteTask={handleDeleteTask}
+          handleAddTask={handleAddTask}
+        />
       </Content>
 
       <Footer>

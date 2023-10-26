@@ -13,8 +13,8 @@ function TaskForm({
   myDescription,
   setOpenForm,
 }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(myTitle || "");
+  const [description, setDescription] = useState(myDescription || "");
 
   //   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -25,16 +25,19 @@ function TaskForm({
     if (!myId) {
       const newTask = { id, title, description };
       handleAddTask(newTask, myId);
-      setDescription("");
       setTitle("");
+      setDescription("");
     }
 
     //Editing a Task
-
-    myTitle = title;
-    myDescription = description;
-    handleEditTask(myId, myTitle, myDescription);
-    setOpenForm((value) => !value);
+    if (myId) {
+      myTitle = title;
+      myDescription = description;
+      handleEditTask(myId, myTitle, myDescription);
+      setOpenForm((value) => !value);
+      setTitle("");
+      setDescription("");
+    }
   }
 
   return (

@@ -48,6 +48,7 @@ function ListElement({
         }}
       >
         <FormControlLabel
+          color="black"
           control={
             <Checkbox
               icon={<AllOutIcon />}

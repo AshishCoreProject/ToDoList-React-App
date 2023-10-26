@@ -24,7 +24,7 @@ function TaskForm({
     //Adding a Task
     if (!myId) {
       const newTask = { id, title, description };
-      handleAddTask(newTask, myId);
+      handleAddTask(newTask);
       setTitle("");
       setDescription("");
     }

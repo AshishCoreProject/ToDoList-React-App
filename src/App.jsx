@@ -41,7 +41,7 @@ function App() {
 
   //Adding into the array.
   function handleAddTask(newTask) {
-    setTasks([newTask, ...tasks]);
+    setTasks([...tasks, newTask]);
     console.log(tasks);
   }
 
@@ -106,6 +106,7 @@ function App() {
         )}
         <List
           tasks={tasks}
+          setTasks={setTasks}
           deleteTask={handleDeleteTask}
           handleAddTask={handleAddTask}
           handleEditTask={handleEditTask}

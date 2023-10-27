@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button, Card, CardActions, CardContent, Input } from "@mui/material";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import Priority from "./Priority";
 
 function TaskForm({
   isAddTask,
@@ -15,6 +16,7 @@ function TaskForm({
 }) {
   const [title, setTitle] = useState(myTitle || "");
   const [description, setDescription] = useState(myDescription || "");
+  const [priority, setPriority] = useState("P4");
 
   //   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -23,8 +25,9 @@ function TaskForm({
     const id = Date.now().toString().slice(8, 12);
     //Adding a Task
     if (!myId) {
-      const newTask = { id, title, description };
+      const newTask = { id, title, description, priority };
       handleAddTask(newTask);
+      setPriority("P4");
       setTitle("");
       setDescription("");
     }
@@ -33,7 +36,7 @@ function TaskForm({
     if (myId) {
       myTitle = title;
       myDescription = description;
-      handleEditTask(myId, myTitle, myDescription);
+      handleEditTask(myId, myTitle, myDescription, priority);
       setOpenForm((value) => !value);
       setTitle("");
       setDescription("");
@@ -79,6 +82,8 @@ function TaskForm({
               justifyContent: "end",
             }}
           >
+            <Priority priority={priority} setPriority={setPriority} />
+
             <Button
               sx={{
                 bgcolor: "#ACFFAD",
@@ -94,8 +99,9 @@ function TaskForm({
                 // logic of if we edit the form it should be closed
                 if (!myId) {
                   setIsAddTask(!isAddTask);
+                } else {
+                  setOpenForm((value) => !value);
                 }
-                setOpenForm((value) => !value);
               }}
             >
               Cancel

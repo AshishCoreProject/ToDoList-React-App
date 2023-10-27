@@ -2,6 +2,7 @@
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Box } from "@mui/material";
 import ListElement from "./ListElement";
+import DayTime from "./DayTime";
 
 function List({ tasks, setTasks, deleteTask, handleEditTask, handleAddTask }) {
   const droppables = Date.now().toString().slice(8, 12);
@@ -19,6 +20,7 @@ function List({ tasks, setTasks, deleteTask, handleEditTask, handleAddTask }) {
       <Droppable droppableId={droppables}>
         {(provided) => (
           <Box ref={provided.innerRef}>
+            <DayTime />
             {/* //////////////////////////////////////////// */}
             {tasks.map((task, index) => (
               <ListElement
@@ -30,6 +32,7 @@ function List({ tasks, setTasks, deleteTask, handleEditTask, handleAddTask }) {
                 deleteTask={deleteTask}
                 handleEditTask={handleEditTask}
                 index={index}
+                priority={task.priority}
               />
             ))}
             {provided.placeholder}

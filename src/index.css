@@ -7,3 +7,22 @@
 body {
   margin-top: 0;
 }
+
+#priority {
+  padding-left: 15px;
+  padding-right: 2px;
+  margin-right: 10px;
+  color: #360982;
+  background-color: #dfccfb;
+  cursor: pointer;
+  font-family: Montserrat;
+}
+option {
+  font-family: Montserrat;
+  cursor: pointer;
+  color: #360982;
+  background-color: #dfccfb;
+  border-radius: 5px;
+
+  /* width: 100px; */
+}

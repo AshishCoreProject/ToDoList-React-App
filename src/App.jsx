@@ -4,13 +4,14 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import TaskForm from "./components/TaskForm";
 import List from "./components/List";
 import { Box, Button, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 const Header = styled.div`
   color: #3e978b;
   height: 50px;
   text-align: left;
   font-family: cursive;
-  background: #acffad;
+  background: #beadfa;
 `;
 const BrandTitle = styled.h1`
   margin: 1px;
@@ -29,7 +30,7 @@ const Footer = styled.div`
   height: 40px;
   text-align: center;
   font-family: Archivo Black;
-  background-color: #98eecc;
+  background-color: #ac92fa;
 `;
 const FooterName = styled.p`
   margin: 0;
@@ -38,7 +39,21 @@ const FooterName = styled.p`
 function App() {
   const [isAddTask, setIsAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
+  console.log(tasks);
 
+  ////////////////////////////////////////////////////////////
+  useEffect(() => {
+    const storedArray = JSON.parse(localStorage.getItem("tasks"));
+    if (storedArray) {
+      setTasks(storedArray);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  ////////////////////////////////////////////////////////////
   //Adding into the array.
   function handleAddTask(newTask) {
     setTasks([...tasks, newTask]);
@@ -73,7 +88,7 @@ function App() {
           <BrandTitle>
             <Typography
               sx={{
-                color: " #54436B",
+                color: " #360982",
                 "&:hover": { color: "#360982" },
                 fontFamily: "Montserrat",
                 fontWeight: "600",
@@ -95,12 +110,31 @@ function App() {
             tasks={tasks}
           />
         ) : (
-          <Box>
+          <Box sx={{ width: "600px" }}>
             <Button
-              sx={{ color: "gray" }}
+              sx={{
+                color: "#360982",
+                padding: "6px 2px",
+
+                "&:hover": {
+                  bgcolor: "#AC92FA",
+                  opacity: "90%",
+                  color: "#fff",
+                },
+              }}
               onClick={() => setIsAddTask(!isAddTask)}
             >
-              <AddOutlinedIcon /> Add task
+              <AddOutlinedIcon
+                sx={{
+                  color: "#360982",
+                  "&:hover": {
+                    bgcolor: "#AC92FA",
+                    opacity: "50%",
+                    color: "#fff",
+                  },
+                }}
+              />
+              Add task
             </Button>
           </Box>
         )}

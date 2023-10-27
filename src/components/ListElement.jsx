@@ -19,12 +19,27 @@ function ListElement({
   id,
   title,
   description,
+  priority,
   deleteTask,
   handleEditTask,
   handleAddTask,
   index,
 }) {
   let [openForm, setOpenForm] = useState(false);
+
+  function handlePriority() {
+    if (priority === "P4") return <AllOutIcon sx={{ color: "gray" }} />;
+    if (priority === "P3") return <AllOutIcon sx={{ color: "green" }} />;
+    if (priority === "P2") return <AllOutIcon sx={{ color: "blue" }} />;
+    if (priority === "P1") return <AllOutIcon sx={{ color: "red" }} />;
+  }
+
+  function handleCheckPriority() {
+    if (priority === "P4") return <CheckCircleIcon sx={{ color: "green" }} />;
+    if (priority === "P3") return <CheckCircleIcon sx={{ color: "green" }} />;
+    if (priority === "P2") return <CheckCircleIcon sx={{ color: "blue" }} />;
+    if (priority === "P1") return <CheckCircleIcon sx={{ color: "red" }} />;
+  }
 
   return (
     <Draggable key={id} draggableId={id} index={index}>
@@ -63,9 +78,9 @@ function ListElement({
               color="black"
               control={
                 <Checkbox
-                  icon={<AllOutIcon />}
+                  icon={handlePriority()}
                   color="success"
-                  checkedIcon={<CheckCircleIcon />}
+                  checkedIcon={handleCheckPriority()}
                   // size="medium"
                   onChange={() => deleteTask(id)}
                 />

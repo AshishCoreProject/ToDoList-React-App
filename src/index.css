@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .header h1 {
   font-family: Montserrat;
 }
@@ -5,7 +9,7 @@
   color: #54b435;
 }
 body {
-  margin-top: 0;
+  margin: 0;
 }
 
 #priority {

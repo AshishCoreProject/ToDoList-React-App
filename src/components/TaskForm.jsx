@@ -12,6 +12,7 @@ function TaskForm({
   myId,
   myTitle,
   myDescription,
+  myPriority,
   setOpenForm,
 }) {
   const [title, setTitle] = useState(myTitle || "");
@@ -36,7 +37,8 @@ function TaskForm({
     if (myId) {
       myTitle = title;
       myDescription = description;
-      handleEditTask(myId, myTitle, myDescription, priority);
+      myPriority = priority;
+      handleEditTask(myId, myTitle, myDescription, myPriority);
       setOpenForm((value) => !value);
       setTitle("");
       setDescription("");

@@ -120,6 +120,7 @@ function ListElement({
                 myId={id}
                 myTitle={title}
                 myDescription={description}
+                myPriority={priority}
                 setOpenForm={setOpenForm}
               />
             )}

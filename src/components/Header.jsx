@@ -19,7 +19,19 @@ const BrandTitle = styled.h1`
   margin: 1px;
 `;
 
-function Header({ setOpenSidebar }) {
+function Header({ api, setOpenSidebar }) {
+  function handleClick() {
+    console.log("clicked nav");
+    setOpenSidebar((value) => !value);
+    api.start({
+      from: {
+        x: 0,
+      },
+      to: {
+        x: 100,
+      },
+    });
+  }
   return (
     <>
       <HeaderStyle className="header">
@@ -39,7 +51,7 @@ function Header({ setOpenSidebar }) {
               variant="h1"
             >
               <DensityMediumOutlinedIcon
-                onClick={() => setOpenSidebar((value) => !value)}
+                onClick={handleClick}
                 sx={{ color: "white", cursor: "pointer" }}
               />
               <Box sx={{ paddingLeft: "5px" }}>ToDo</Box>

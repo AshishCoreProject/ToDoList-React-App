@@ -29,16 +29,23 @@ function ListElement({
 
   function handlePriority() {
     if (priority === "P4") return <AllOutIcon sx={{ color: "gray" }} />;
-    if (priority === "P3") return <AllOutIcon sx={{ color: "green" }} />;
-    if (priority === "P2") return <AllOutIcon sx={{ color: "blue" }} />;
-    if (priority === "P1") return <AllOutIcon sx={{ color: "red" }} />;
+    if (priority === "P3")
+      return <AllOutIcon sx={{ color: "rgb(34 197 94)" }} />;
+    if (priority === "P2")
+      return <AllOutIcon sx={{ color: " rgb(2 132 199);" }} />;
+    if (priority === "P1")
+      return <AllOutIcon sx={{ color: " rgb(225 29 72);" }} />;
   }
 
   function handleCheckPriority() {
-    if (priority === "P4") return <CheckCircleIcon sx={{ color: "green" }} />;
-    if (priority === "P3") return <CheckCircleIcon sx={{ color: "green" }} />;
-    if (priority === "P2") return <CheckCircleIcon sx={{ color: "blue" }} />;
-    if (priority === "P1") return <CheckCircleIcon sx={{ color: "red" }} />;
+    if (priority === "P4")
+      return <CheckCircleIcon sx={{ color: "rgb(34 197 94)" }} />;
+    if (priority === "P3")
+      return <CheckCircleIcon sx={{ color: "rgb(34 197 94)" }} />;
+    if (priority === "P2")
+      return <CheckCircleIcon sx={{ color: " rgb(2 132 199);" }} />;
+    if (priority === "P1")
+      return <CheckCircleIcon sx={{ color: " rgb(225 29 72);" }} />;
   }
 
   return (

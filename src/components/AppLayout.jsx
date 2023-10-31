@@ -3,14 +3,23 @@ import { Box } from "@mui/material";
 
 import Footer from "./Footer";
 import Header from "./Header";
-import SideNavBar from "./SideNavBar";
+// import SideNavBar from "./SideNavBar";
+import AnimateNavbar from "./AnimateNavbar";
 import { useState } from "react";
+import { useSpring, animated } from "@react-spring/web";
 
 function AppLayout() {
   const [openSidebar, setOpenSidebar] = useState(false);
+
+  const [springs, api] = useSpring(() => ({
+    from: { x: 100 },
+  }));
+
+  const Animatedcomponent = animated(AnimateNavbar);
+
   return (
     <>
-      <Header openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+      <Header api={api} setOpenSidebar={setOpenSidebar} />
       <Box
         sx={{
           display: "flex",
@@ -18,11 +27,7 @@ function AppLayout() {
           height: "100%",
         }}
       >
-        {openSidebar && (
-          <Box sx={{ width: "370px" }}>
-            <SideNavBar />
-          </Box>
-        )}
+        {openSidebar && <Animatedcomponent style={springs} />}
 
         <Box sx={{ width: "100%" }}>
           <Outlet />

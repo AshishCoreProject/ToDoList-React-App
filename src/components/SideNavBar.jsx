@@ -32,7 +32,7 @@ const P = styled.p`
 
 function SideNavBar() {
   return (
-    <div>
+    <>
       <nav>
         <Ul>
           <List>
@@ -93,7 +93,7 @@ function SideNavBar() {
           </List>
         </Ul>
       </nav>
-    </div>
+    </>
   );
 }
 

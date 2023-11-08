@@ -1,14 +1,15 @@
+/* eslint-disable react/prop-types */
 import { Box, Typography } from "@mui/material";
-import { fetchDate } from "../services/fetchDate";
+import { fetchDate } from "../../services/fetchDate";
 
-function DayTime() {
+function ProjectTitle({ title }) {
   const { day, thisDate, month } = fetchDate();
 
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "baseline", width: "600px" }}>
         <Typography variant="h6" color="initial" sx={{ fontWeight: "700" }}>
-          Today
+          {title}
         </Typography>
         <Typography
           variant="caption"
@@ -21,4 +22,4 @@ function DayTime() {
   );
 }
 
-export default DayTime;
+export default ProjectTitle;

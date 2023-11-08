@@ -1,5 +1,6 @@
-import { Outlet } from "react-router-dom";
-import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import UniqueProject from "./UniqueProject";
 
 const ContentStyle = styled.div`
   display: flex;
@@ -12,13 +13,13 @@ const ContentStyle = styled.div`
   font-family: Montserrat;
 `;
 
-function Project() {
+function NewProject() {
+  const { id } = useParams();
   return (
     <ContentStyle>
-      <p>ProjectPage</p>
-      <Outlet />
+      <UniqueProject Id={id} />
     </ContentStyle>
   );
 }
 
-export default Project;
+export default NewProject;

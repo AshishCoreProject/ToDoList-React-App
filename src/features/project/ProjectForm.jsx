@@ -1,64 +1,33 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import { Button, Card, CardActions, CardContent, Input } from "@mui/material";
+import Priority from "../../components/Priority";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import Priority from "./Priority";
-import { useTodo } from "../PostContext";
-import { fetchDate } from "../services/fetchDate";
+import { useState } from "react";
+import { useTodo } from "../../PostContext";
+import { fetchDate } from "../../services/fetchDate";
 
-function TaskForm({
-  handleEditTask,
-  myId,
-  myTitle,
-  myDescription,
-  myPriority,
-  myDueDate,
-  myDueMonth,
-  setOpenForm,
-}) {
-  const { isAddTask, setIsAddTask, handleAddTask } = useTodo();
-  const [title, setTitle] = useState(myTitle || "");
-  const [description, setDescription] = useState(myDescription || "");
+function ProjectForm({ isAddTask, setIsAddTask, Id }) {
+  const { handleAddProject } = useTodo();
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("P4");
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const { thisDate, monthNum, year, month } = fetchDate();
     const id = Date.now().toString().slice(8, 12);
 
     const dueDate = `${year}/${monthNum}/${thisDate}`;
     const dueMonth = `${month}`;
 
-    //Adding a Task
-    if (!myId) {
-      const newTask = { id, title, description, priority, dueDate, dueMonth };
+    const todo = { id, title, description, priority, dueDate, dueMonth };
 
-      handleAddTask(newTask);
-      setPriority("P4");
-      setTitle("");
-      setDescription("");
-    }
-
-    //Editing a Task
-    if (myId) {
-      myTitle = title;
-      myDescription = description;
-      myPriority = priority;
-      myDueDate = dueDate;
-      myDueMonth = dueMonth;
-      handleEditTask(
-        myId,
-        myTitle,
-        myDescription,
-        myPriority,
-        myDueDate,
-        myDueMonth
-      );
-      setOpenForm((value) => !value);
-      setTitle("");
-      setDescription("");
-    }
+    handleAddProject(todo, Id);
+    setPriority("P4");
+    setTitle("");
+    setDescription("");
   }
 
   return (
@@ -114,12 +83,7 @@ function TaskForm({
                 },
               }}
               onClick={() => {
-                // logic of if we edit the form it should be closed
-                if (!myId) {
-                  setIsAddTask(!isAddTask);
-                } else {
-                  setOpenForm((value) => !value);
-                }
+                setIsAddTask(!isAddTask);
               }}
             >
               Cancel
@@ -139,7 +103,8 @@ function TaskForm({
               type="submit"
               disabled={!(title && description)}
             >
-              {myId ? "Edit" : <AddOutlinedIcon />}
+              {/* {myId ? "Edit" : <AddOutlinedIcon />} */}
+              <AddOutlinedIcon />
             </Button>
           </CardActions>
         </form>
@@ -148,4 +113,4 @@ function TaskForm({
   );
 }
 
-export default TaskForm;
+export default ProjectForm;

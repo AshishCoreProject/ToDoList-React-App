@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { styled } from "styled-components";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import UpcomingOutlinedIcon from "@mui/icons-material/UpcomingOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import ProjectSidebar from "../features/project/ProjectSidebar";
 
 const List = styled.li`
   list-style: none;
@@ -19,7 +19,7 @@ const Navlink = styled(NavLink)`
   text-decoration: none;
   display: flex;
   align-items: center;
-  height: 30px;
+  /* height: 30px; */
   color: #360982;
   border-radius: 5px;
   padding: 3px 0;
@@ -49,20 +49,7 @@ function SideNavBar() {
               <Typography sx={{ fontSize: "medium" }}>Today</Typography>
             </Navlink>
           </List>
-          <List>
-            <Navlink to="/project">
-              <P>
-                <WorkOutlineIcon
-                  sx={{
-                    margin: 0,
-                    paddingRight: "7px",
-                    color: "rgb(37 99 235)",
-                  }}
-                />
-              </P>
-              <Typography sx={{ fontSize: "medium" }}>Project</Typography>
-            </Navlink>
-          </List>
+
           <List>
             <Navlink to="/login">
               <P>
@@ -89,6 +76,12 @@ function SideNavBar() {
                 />
               </P>
               <Typography sx={{ fontSize: "medium" }}>Login</Typography>
+            </Navlink>
+          </List>
+          <Divider light />
+          <List>
+            <Navlink to="/project">
+              <ProjectSidebar />
             </Navlink>
           </List>
         </Ul>

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 const FooterStyle = styled.div`
+  position: relative;
   color: #fff;
   height: 40px;
   text-align: center;

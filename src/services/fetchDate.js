@@ -3,8 +3,9 @@ export function fetchDate() {
   const todayDate = date.toDateString();
   const todayDetails = todayDate.toString();
   const day = todayDetails.slice(0, 3);
-  const month = date.getMonth();
+  const monthNum = date.getMonth();
   const thisDate = date.getDate();
-  const year = todayDetails.slice(4, 8);
-  return { day, month, thisDate, year };
+  const month = todayDetails.slice(4, 8);
+  const year = date.getFullYear();
+  return { day, month, monthNum, thisDate, year };
 }

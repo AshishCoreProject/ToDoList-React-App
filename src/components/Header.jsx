@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 
 const HeaderStyle = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   color: #3e978b;
@@ -21,7 +22,6 @@ const BrandTitle = styled.h1`
 
 function Header({ api, setOpenSidebar }) {
   function handleClick() {
-    console.log("clicked nav");
     setOpenSidebar((value) => !value);
     api.start({
       from: {
@@ -48,7 +48,7 @@ function Header({ api, setOpenSidebar }) {
                 fontFamily: "Montserrat",
                 fontWeight: "600",
               }}
-              variant="h1"
+              variant="p"
             >
               <DensityMediumOutlinedIcon
                 onClick={handleClick}

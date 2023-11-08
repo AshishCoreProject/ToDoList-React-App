@@ -3,12 +3,13 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Box } from "@mui/material";
 import ListElement from "./ListElement";
 import DayTime from "./DayTime";
+import { useTodo } from "../PostContext";
 
-function List({ tasks, setTasks, deleteTask, handleEditTask, handleAddTask }) {
+function List() {
+  const { tasks, setTasks } = useTodo();
   const droppables = Date.now().toString().slice(8, 12);
 
   function handleOnDragEnd(result) {
-    console.log(result);
     const items = Array.from(tasks);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
@@ -28,11 +29,10 @@ function List({ tasks, setTasks, deleteTask, handleEditTask, handleAddTask }) {
                 id={task.id}
                 title={task.title}
                 description={task.description}
-                handleAddTask={handleAddTask}
-                deleteTask={deleteTask}
-                handleEditTask={handleEditTask}
                 index={index}
                 priority={task.priority}
+                dueDate={task.dueDate}
+                dueMonth={task.dueMonth}
               />
             ))}
             {provided.placeholder}

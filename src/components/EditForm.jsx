@@ -11,7 +11,6 @@ function EditForm(isEdit, setIsEdit, handleAddTask) {
   function handleSubmit(e) {
     e.preventDefault();
     const id = Date.now().toString().slice(8, 12);
-    console.log(id);
     const newTask = { id, title, description };
     handleAddTask(newTask);
     // setIsSubmit(true);

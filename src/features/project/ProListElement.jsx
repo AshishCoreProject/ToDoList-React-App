@@ -12,22 +12,24 @@ import {
   FormControlLabel,
   Typography,
 } from "@mui/material";
-import TaskForm from "./TaskForm";
+// import TaskForm from "./TaskForm";
 import { useState } from "react";
-import { useTodo } from "../PostContext";
-import { fetchDate } from "../services/fetchDate";
+// import { useTodo } from "../PostContext";
+import { fetchDate } from "../../services/fetchDate";
+import { useTodo } from "../../PostContext";
 
 // eslint-disable-next-line react/prop-types
-function ListElement({
+function ProListElement({
   id,
   title,
   description,
   priority,
-  index,
   dueDate,
   dueMonth,
+  index,
+  projectId,
 }) {
-  const { handleDeleteTask, handleEditTask } = useTodo();
+  const { handleDeleteProject } = useTodo();
   let [openForm, setOpenForm] = useState(false);
 
   const { thisDate, year, monthNum } = fetchDate();
@@ -105,7 +107,7 @@ function ListElement({
                   color="success"
                   checkedIcon={handleCheckPriority()}
                   // size="medium"
-                  onChange={() => handleDeleteTask(id)}
+                  onChange={() => handleDeleteProject(projectId, id)}
                 />
               }
               label={title}
@@ -157,8 +159,9 @@ function ListElement({
             )}
           </Box>
           <Box sx={{ width: "300px" }}>
-            {openForm && (
-              <TaskForm
+            {openForm &&
+              {
+                /* <TaskForm
                 handleEditTask={handleEditTask}
                 myId={id}
                 myTitle={title}
@@ -167,8 +170,8 @@ function ListElement({
                 myDueDate={dueDate}
                 myDueMonth={dueMonth}
                 setOpenForm={setOpenForm}
-              />
-            )}
+              /> */
+              }}
           </Box>
         </Box>
       )}
@@ -176,4 +179,4 @@ function ListElement({
   );
 }
 
-export default ListElement;
+export default ProListElement;

@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 
-// import MilitaryTechOutlinedIcon from "@mui/icons-material/MilitaryTechOutlined";
-
 const Select = styled.select`
   width: 95px;
   height: 35px;
@@ -18,22 +16,19 @@ const Option = styled.option`
   text-decoration: none;
 `;
 
-function Priority({ priority, setPriority }) {
-  console.log(priority);
+function Priority({ setPriority }) {
   return (
     <>
       <Select
         id="priority"
         name="selectedPriority"
-        value={priority}
+        defaultValue="P4"
         onChange={(e) => setPriority(e.target.value)}
       >
         <Option value="P1">Priority P1</Option>
         <Option value="P2">Priority P2</Option>
         <Option value="P3">Priority P3</Option>
-        <Option selected value="P4">
-          Priority P4
-        </Option>
+        <Option value="P4">Priority P4</Option>
       </Select>
     </>
   );

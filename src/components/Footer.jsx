@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { fetchDate } from "../services/fetchDate";
 const FooterStyle = styled.div`
   position: relative;
   color: #fff;
@@ -13,10 +14,11 @@ const FooterName = styled.p`
 `;
 
 function Footer() {
+  const { year } = fetchDate();
   return (
     <>
       <FooterStyle>
-        <FooterName>copyright 2023</FooterName>
+        <FooterName>copyright {year}</FooterName>
       </FooterStyle>
     </>
   );

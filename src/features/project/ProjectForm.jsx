@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { Button, Card, CardActions, CardContent, Input } from "@mui/material";
 import Priority from "../../components/Priority";
@@ -7,7 +6,20 @@ import { useState } from "react";
 import { useTodo } from "../../PostContext";
 import { fetchDate } from "../../services/fetchDate";
 
-function ProjectForm({ isAddTask, setIsAddTask, Id }) {
+function ProjectForm({
+  isAddTask,
+  setIsAddTask,
+  Id,
+  handleEditProject,
+  myId,
+  myTitle,
+  myDescription,
+  myPriority,
+  myDueDate,
+  myDueMonth,
+  setOpenForm,
+  projectId,
+}) {
   const { handleAddProject } = useTodo();
 
   const [title, setTitle] = useState("");
@@ -22,12 +34,36 @@ function ProjectForm({ isAddTask, setIsAddTask, Id }) {
     const dueDate = `${year}/${monthNum}/${thisDate}`;
     const dueMonth = `${month}`;
 
+    //Adding to ProjectList
     const todo = { id, title, description, priority, dueDate, dueMonth };
 
     handleAddProject(todo, Id);
     setPriority("P4");
     setTitle("");
     setDescription("");
+
+    //Editing the ProjectList
+    if (myId) {
+      myTitle = title;
+      myDescription = description;
+      myPriority = priority;
+      myDueDate = dueDate;
+      myDueMonth = dueMonth;
+
+      handleEditProject(
+        projectId,
+        myId,
+        myTitle,
+        myDescription,
+        myPriority,
+        myDueDate,
+        myDueMonth
+      );
+
+      setOpenForm((value) => !value);
+      setTitle("");
+      setDescription("");
+    }
   }
 
   return (
@@ -103,8 +139,7 @@ function ProjectForm({ isAddTask, setIsAddTask, Id }) {
               type="submit"
               disabled={!(title && description)}
             >
-              {/* {myId ? "Edit" : <AddOutlinedIcon />} */}
-              <AddOutlinedIcon />
+              {myId ? "Edit" : <AddOutlinedIcon />}
             </Button>
           </CardActions>
         </form>

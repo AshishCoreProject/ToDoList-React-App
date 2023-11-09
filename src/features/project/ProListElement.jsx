@@ -12,11 +12,10 @@ import {
   FormControlLabel,
   Typography,
 } from "@mui/material";
-// import TaskForm from "./TaskForm";
 import { useState } from "react";
-// import { useTodo } from "../PostContext";
 import { fetchDate } from "../../services/fetchDate";
 import { useTodo } from "../../PostContext";
+import ProjectForm from "./ProjectForm";
 
 // eslint-disable-next-line react/prop-types
 function ProListElement({
@@ -29,7 +28,7 @@ function ProListElement({
   index,
   projectId,
 }) {
-  const { handleDeleteProject } = useTodo();
+  const { handleDeleteProject, handleEditProject } = useTodo();
   let [openForm, setOpenForm] = useState(false);
 
   const { thisDate, year, monthNum } = fetchDate();
@@ -159,10 +158,10 @@ function ProListElement({
             )}
           </Box>
           <Box sx={{ width: "300px" }}>
-            {openForm &&
-              {
-                /* <TaskForm
-                handleEditTask={handleEditTask}
+            {openForm && (
+              <ProjectForm
+                handleEditProject={handleEditProject}
+                projectId={projectId}
                 myId={id}
                 myTitle={title}
                 myDescription={description}
@@ -170,8 +169,8 @@ function ProListElement({
                 myDueDate={dueDate}
                 myDueMonth={dueMonth}
                 setOpenForm={setOpenForm}
-              /> */
-              }}
+              />
+            )}
           </Box>
         </Box>
       )}

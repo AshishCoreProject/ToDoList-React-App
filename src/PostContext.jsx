@@ -110,16 +110,58 @@ function PostProvider({ children }) {
       (element) => element.id === deleteProjectId
     );
 
+    setTimeout(() => {
+      if (project) {
+        const updatedProject = {
+          ...project,
+          projectTodo: [...project.projectTodo].filter(
+            (item) => item.id !== deleteProjectSubArrayId
+          ),
+        };
+        const updatedProjectList = projectList.map((p) =>
+          p.id === deleteProjectId ? updatedProject : p
+        );
+        setProjectList(updatedProjectList);
+      }
+    }, 300);
+  }
+  //////////////////////////////////////////////////////////////////////////////////
+  function handleEditProject(
+    projectId,
+    myId,
+    myTitle,
+    myDescription,
+    myPriority,
+    myDueDate,
+    myDueMonth
+  ) {
+    const project = projectList.find((item) => item.id === projectId);
+
     if (project) {
       const updatedProject = {
         ...project,
-        projectTodo: [...project.projectTodo].filter(
-          (item) => item.id !== deleteProjectSubArrayId
-        ),
+        projectTodo: [...project.projectTodo].map((item) => {
+          if (item.id === myId) {
+            const updateArray = {
+              ...item,
+              id: myId,
+              title: myTitle,
+              description: myDescription,
+              priority: myPriority,
+              dueDate: myDueDate,
+              dueMonth: myDueMonth,
+            };
+            return updateArray;
+          }
+          return item;
+        }),
       };
+
+      //pretier-ignore
       const updatedProjectList = projectList.map((p) =>
-        p.id === deleteProjectId ? updatedProject : p
+        p.id === projectId ? updatedProject : p
       );
+
       setProjectList(updatedProjectList);
     }
   }
@@ -137,6 +179,7 @@ function PostProvider({ children }) {
         projectList: projectList,
         handleAddProject: handleAddProject,
         handleDeleteProject: handleDeleteProject,
+        handleEditProject: handleEditProject,
       }}
     >
       {children}

@@ -2,7 +2,7 @@
 import { Box } from "@mui/material";
 import ProjectTitle from "./ProjectTitle";
 import { useTodo } from "../../PostContext";
-import ProListElement from "./ProListElement";
+import ProjectListElement from "./ProjectListElement";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function ProList({ projectId, setProjectList }) {
@@ -28,13 +28,14 @@ function ProList({ projectId, setProjectList }) {
           <Box ref={provided.innerRef}>
             <ProjectTitle title={project.projectName} />
             {projectSubList?.map((item, index) => (
-              <ProListElement
+              <ProjectListElement
                 key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 dueDate={item.dueDate}
                 dueMonth={item.dueMonth}
+                priority={item.priority}
                 index={index}
                 projectId={projectId}
               />

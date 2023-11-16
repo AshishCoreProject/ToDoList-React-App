@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import UniqueProject from "./UniqueProject";
+import ProjectContent from "./ProjectContent";
 
 const ContentStyle = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ function NewProject() {
   const { id } = useParams();
   return (
     <ContentStyle>
-      <UniqueProject Id={id} />
+      <ProjectContent Id={id} />
     </ContentStyle>
   );
 }

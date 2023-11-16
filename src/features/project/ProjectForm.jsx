@@ -20,10 +20,11 @@ function ProjectForm({
   setOpenForm,
   projectId,
 }) {
+  console.log(Id, myId, projectId);
   const { handleAddProject } = useTodo();
-
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  // const { isAddTask, setIsAddTask } = useState(false);
+  const [title, setTitle] = useState(myTitle || "");
+  const [description, setDescription] = useState(myDescription || "");
   const [priority, setPriority] = useState("P4");
 
   function handleSubmit(e) {
@@ -119,7 +120,12 @@ function ProjectForm({
                 },
               }}
               onClick={() => {
-                setIsAddTask(!isAddTask);
+                // logic of if we edit the form it should be closed
+                if (!myId) {
+                  setIsAddTask(!isAddTask);
+                } else {
+                  setOpenForm((value) => !value);
+                }
               }}
             >
               Cancel
@@ -134,7 +140,6 @@ function ProjectForm({
                   color: "white",
                 },
               }}
-              // size="small"
               variant="contained"
               type="submit"
               disabled={!(title && description)}

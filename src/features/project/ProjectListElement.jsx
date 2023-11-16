@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Draggable } from "react-beautiful-dnd";
-import AllOutIcon from "@mui/icons-material/AllOut";
+import BlurCircularIcon from "@mui/icons-material/BlurCircular";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
@@ -18,7 +18,7 @@ import { useTodo } from "../../PostContext";
 import ProjectForm from "./ProjectForm";
 
 // eslint-disable-next-line react/prop-types
-function ProListElement({
+function ProjectListElement({
   id,
   title,
   description,
@@ -38,20 +38,20 @@ function ProListElement({
   const listDate = dueDate.replaceAll("/", "");
 
   let dayList = dueDate.slice(8);
-  // let monthList = listDate.slice(5, 7); // 9
-  // let year = listDate.slice(0, 4);      // 2023
 
   const isYesterday = curDate - listDate === 1;
   const isDelayed = curDate > listDate;
 
+  console.log(priority);
+
   function handlePriority() {
-    if (priority === "P4") return <AllOutIcon sx={{ color: "gray" }} />;
+    if (priority === "P4") return <BlurCircularIcon sx={{ color: "gray" }} />;
     if (priority === "P3")
-      return <AllOutIcon sx={{ color: "rgb(34 197 94)" }} />;
+      return <BlurCircularIcon sx={{ color: "rgb(34 197 94)" }} />;
     if (priority === "P2")
-      return <AllOutIcon sx={{ color: " rgb(2 132 199);" }} />;
+      return <BlurCircularIcon sx={{ color: " rgb(2 132 199);" }} />;
     if (priority === "P1")
-      return <AllOutIcon sx={{ color: " rgb(225 29 72);" }} />;
+      return <BlurCircularIcon sx={{ color: " rgb(225 29 72);" }} />;
   }
 
   function handleCheckPriority() {
@@ -80,7 +80,6 @@ function ProListElement({
             boxShadow: "1px 1px 1px lightgray ",
 
             width: "600px",
-            // height: "50px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -105,7 +104,6 @@ function ProListElement({
                   icon={handlePriority()}
                   color="success"
                   checkedIcon={handleCheckPriority()}
-                  // size="medium"
                   onChange={() => handleDeleteProject(projectId, id)}
                 />
               }
@@ -178,4 +176,4 @@ function ProListElement({
   );
 }
 
-export default ProListElement;
+export default ProjectListElement;

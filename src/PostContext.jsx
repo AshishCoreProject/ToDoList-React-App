@@ -28,6 +28,7 @@ function PostProvider({ children }) {
     },
   ]);
 
+  console.log(projectList);
   //Creating Due Date Login
   ////////////////////////////////////////////////////////////////
   useEffect(() => {
@@ -81,7 +82,7 @@ function PostProvider({ children }) {
 
   ///////////////////////////////////////////////////////////////////////////////
   function handleAddProject(subTask, TakeLogic) {
-    const project = projectList.find((element) => element.id === TakeLogic); //A
+    const project = projectList.find((element) => element.id === TakeLogic);
     //{id: '481', projectName: 'React.js', projectTodo: Array(0)}  ------getting an object
 
     if (project) {

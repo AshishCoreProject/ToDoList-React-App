@@ -3,7 +3,7 @@ import { useState } from "react";
 import AddTask from "../../components/AddTask";
 import { styled } from "styled-components";
 import ProjectForm from "./ProjectForm";
-import ProList from "./ProList";
+import ProjectList from "./ProjectList";
 
 const ContentStyle = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const ContentStyle = styled.div`
   align-items: center;
 `;
 
-function UniqueProject({ Id }) {
+function ProjectContent({ Id }) {
   const [isAddTask, setIsAddTask] = useState(false);
 
   return (
@@ -31,10 +31,10 @@ function UniqueProject({ Id }) {
         ) : (
           <AddTask isAddTask={isAddTask} setIsAddTask={setIsAddTask} />
         )}
-        <ProList projectId={Id} />
+        <ProjectList projectId={Id} />
       </ContentStyle>
     </>
   );
 }
 
-export default UniqueProject;
+export default ProjectContent;

@@ -137,7 +137,6 @@ function TaskForm({
                   color: "white",
                 },
               }}
-              // size="small"
               variant="contained"
               type="submit"
               disabled={!(title && description)}

@@ -1,8 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom";
 import { styled } from "styled-components";
 import { useTodo } from "../PostContext";
-import { Box, List, ListItem, ListItemText } from "@mui/material";
-import StarsTwoToneIcon from "@mui/icons-material/StarsTwoTone";
+import { Box, List } from "@mui/material";
+import NumberOfProject from "../features/project/NumberOfProject";
+import { Outlet } from "react-router-dom";
 
 const ContentStyle = styled.div`
   display: flex;
@@ -14,12 +14,6 @@ const ContentStyle = styled.div`
   align-items: center;
   font-family: Montserrat;
   flex-wrap: wrap;
-`;
-
-const Navlink = styled(NavLink)`
-  text-decoration: none;
-  /* color: #404258; */
-  cursor: pointer;
 `;
 
 const style = {
@@ -35,6 +29,7 @@ const style = {
 
 function Project() {
   const { projectList } = useTodo();
+
   return (
     <>
       <ContentStyle>
@@ -59,30 +54,12 @@ function Project() {
               My Project
             </Box>
             {projectList.map((projectItem) => (
-              <Navlink key={projectItem.id} to={`${projectItem.id}`}>
-                <ListItem
-                  sx={{
-                    borderBottom: "1px solid #B2A4FF",
-                    padding: "5px 15px ",
-                    "&:hover": "bgColor: #B2A4FF",
-                  }}
-                >
-                  <StarsTwoToneIcon
-                    sx={{ color: "#82CD47", paddingRight: "15px" }}
-                  />
-                  <ListItemText
-                    primaryTypographyProps={{
-                      fontSize: "17px",
-                      fontWeight: "500",
-                    }}
-                    sx={{
-                      textDecoration: "none",
-                      color: "black",
-                    }}
-                    primary={projectItem.projectName}
-                  />
-                </ListItem>
-              </Navlink>
+              <>
+                <NumberOfProject
+                  key={projectItem.id}
+                  projectItem={projectItem}
+                />
+              </>
             ))}
           </List>
         )}

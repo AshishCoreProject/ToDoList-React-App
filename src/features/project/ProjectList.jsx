@@ -5,7 +5,7 @@ import { useTodo } from "../../PostContext";
 import ProjectListElement from "./ProjectListElement";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-function ProList({ projectId, setProjectList }) {
+function ProjectList({ projectId, setProjectList }) {
   const { projectList } = useTodo();
 
   const project = projectList.find((element) => element.id === projectId);
@@ -47,4 +47,4 @@ function ProList({ projectId, setProjectList }) {
   );
 }
 
-export default ProList;
+export default ProjectList;

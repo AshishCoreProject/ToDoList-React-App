@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+
 const ContentStyle = styled.div`
   display: flex;
   height: 800px;
@@ -13,7 +14,7 @@ const ContentStyle = styled.div`
 function Signup() {
   return (
     <ContentStyle>
-      <p>Sign up page</p>
+      <p> This is Signup Page</p>
     </ContentStyle>
   );
 }

@@ -12,7 +12,7 @@ const Navlink = styled(NavLink)`
   cursor: pointer;
 `;
 
-function ProjectItems() {
+function ProjectSidebarItems() {
   const { projectList } = useTodo();
 
   let color = randomColor();
@@ -53,4 +53,4 @@ function ProjectItems() {
   );
 }
 
-export default ProjectItems;
+export default ProjectSidebarItems;

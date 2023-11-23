@@ -83,6 +83,7 @@ function PostProvider({ children }) {
   ///////////////////////////////////////////////////////////////////////////////
   function handleAddProject(subTask, TakeLogic) {
     const project = projectList.find((element) => element.id === TakeLogic);
+    console.log(project);
     //{id: '481', projectName: 'React.js', projectTodo: Array(0)}  ------getting an object
 
     if (project) {
@@ -90,6 +91,7 @@ function PostProvider({ children }) {
         ...project,
         projectTodo: [...project.projectTodo, subTask],
       };
+
       const updatedProjectList = projectList.map((p) =>
         p.id === TakeLogic ? updatedProject : p
       );
@@ -102,11 +104,27 @@ function PostProvider({ children }) {
       setProjectList([...projectList, subTask]),
         console.log("Adding into Main Array");
   }
+  ///////////////////////////////////////////////////////////////////////////////
+  function handleDeleteProjectList(id) {
+    setProjectList(projectList.filter((ProjectItem) => ProjectItem.id !== id));
+  }
+
+  function handleEditProjectList(id, EditProjectName) {
+    const renamedProject = projectList.map((projectItem) => {
+      if (projectItem.id === id) {
+        const updatedProject = {
+          ...projectItem,
+          projectName: EditProjectName,
+        };
+        return updatedProject;
+      }
+      return projectItem;
+    });
+    setProjectList(renamedProject);
+  }
 
   //////////////////////////////////////////////////////////////////////////////
   function handleDeleteProject(deleteProjectId, deleteProjectSubArrayId) {
-    console.log(deleteProjectId);
-
     const project = projectList.find(
       (element) => element.id === deleteProjectId
     );
@@ -179,6 +197,8 @@ function PostProvider({ children }) {
         handleEditTask: handleEditTask,
         projectList: projectList,
         handleAddProject: handleAddProject,
+        handleDeleteProjectList: handleDeleteProjectList,
+        handleEditProjectList: handleEditProjectList,
         handleDeleteProject: handleDeleteProject,
         handleEditProject: handleEditProject,
       }}

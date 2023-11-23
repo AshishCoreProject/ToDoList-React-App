@@ -13,12 +13,14 @@ const Navlink = styled(NavLink)`
   cursor: pointer;
 `;
 
-function NumberOfProject({ projectItem }) {
+function MainProjectItem({ projectItem, projectId }) {
   const [isOpenDotsClicked, setIsOpenDotsClicked] = useState(false);
   const [isOpenDotsVisible, setIsOpenDotsVisible] = useState(false);
+
+  //////////////////////////////////////////////////////////////////////
+  //Creating a functionality of detect click outside the desired element
   const buttonRef = useRef(null);
   const buttonClickedOutside = useOutsideClick(buttonRef);
-  console.log(buttonClickedOutside);
 
   useEffect(() => {
     if (buttonClickedOutside) {
@@ -27,6 +29,7 @@ function NumberOfProject({ projectItem }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttonClickedOutside]);
+  //////////////////////////////////////////////////////////////////////
 
   function handleMouseClick(e) {
     e.stopPropagation();
@@ -102,12 +105,16 @@ function NumberOfProject({ projectItem }) {
               // onMouseOver={handleHovering}
               sx={{
                 position: "absolute",
-                left: 550,
+                left: 590,
                 zIndex: 1,
                 backgroundColor: "white",
               }}
             >
-              <ProjectDotsBar />
+              <ProjectDotsBar
+                projectId={projectId}
+                projectName={projectItem.projectName}
+                projectTodo={projectItem.projectTodo}
+              />
             </Box>
           )}
         </Box>
@@ -116,4 +123,4 @@ function NumberOfProject({ projectItem }) {
   );
 }
 
-export default NumberOfProject;
+export default MainProjectItem;

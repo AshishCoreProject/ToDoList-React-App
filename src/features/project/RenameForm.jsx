@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "styled-components";
 import { useTodo } from "../../PostContext";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const Form = styled.form`
   width: 400px;
@@ -23,54 +24,35 @@ const Input = styled.input`
   font-size: medium;
   font-family: "Montserrat";
 `;
-function AddProjectSideForm({ handleClose }) {
-  const { handleAddProject } = useTodo();
-  const [projectName, setProjectName] = useState("");
-  const [islengthExceeded, setIsLengthExceeded] = useState(false);
 
-  function handleChangeInput(e) {
-    if (e.target.value.length >= 25) {
-      setIsLengthExceeded(true);
-      setProjectName(projectName.slice(0, 25));
-    } else {
-      setProjectName(e.target.value);
-    }
-  }
+function RenameForm({ projectId, projectName, handleClose }) {
+  const { handleEditProjectList } = useTodo();
+  const [renameProject, setRenameProject] = useState(projectName || "");
+
+  const formRef = useRef(null);
+  const formClickOutside = useOutsideClick(formRef, "someLogic");
 
   function handleSubmit(event) {
     event.preventDefault();
-    const id = Date.now().toString().slice(9, 12);
+    // event.stopPropagation();
+    // const id = Date.now().toString().slice(9, 12);
 
-    if (projectName) {
-      const projectDetails = { id, projectName, projectTodo: [] };
-
-      const provideLogicToPostContext = 0;
-      handleAddProject(projectDetails, provideLogicToPostContext);
-      setProjectName("");
-      handleClose();
-    }
+    handleEditProjectList(projectId, renameProject);
+    // setRenameProject("");
+    handleClose();
   }
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} ref={formClickOutside}>
         <Label>Name</Label>
         <Input
-          autoFocus
-          required
           placeholder="Write the Project Name"
           type="text"
-          value={projectName}
-          onChange={handleChangeInput}
-          // inputprops={{ maxLength: 12 }}
+          value={renameProject}
+          autoFocus
+          onChange={(e) => setRenameProject(e.target.value)}
         />
-        {islengthExceeded ? (
-          <Typography sx={{ padding: 0, color: "#ED2B2A", fontSize: "14px" }}>
-            *Exceeded character limit 25
-          </Typography>
-        ) : (
-          ""
-        )}
         <Box
           sx={{
             display: "flex",
@@ -107,4 +89,4 @@ function AddProjectSideForm({ handleClose }) {
   );
 }
 
-export default AddProjectSideForm;
+export default RenameForm;

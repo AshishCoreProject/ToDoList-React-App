@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useOutsideClick = (ref) => {
+const useOutsideClick = (ref, logicValue) => {
   const [outsideClick, setOutsideClick] = useState(null);
 
   useEffect(() => {
@@ -11,15 +11,15 @@ const useOutsideClick = (ref) => {
         setOutsideClick(false);
       }
 
-      // setOutsideClick(null);
+      setOutsideClick(null);
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
+    console.log("click detected");
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, logicValue]);
 
   return outsideClick;
 };

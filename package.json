@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/base": "^5.0.0-beta.24",
     "@mui/icons-material": "^5.14.14",
+    "@mui/joy": "^5.0.0-beta.15",
     "@mui/material": "^5.14.14",
     "@mui/styled-engine-sc": "^6.0.0-alpha.2",
     "@react-spring/web": "^9.7.3",
@@ -22,6 +23,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
+    "react-svg": "^16.1.31",
     "styled-components": "^6.1.0"
   },
   "devDependencies": {

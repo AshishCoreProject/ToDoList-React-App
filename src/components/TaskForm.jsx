@@ -87,6 +87,7 @@ function TaskForm({
               onChange={(e) => setTitle(e.target.value)}
               value={title}
               color="success"
+              autoFocus={true}
             />
 
             <Input

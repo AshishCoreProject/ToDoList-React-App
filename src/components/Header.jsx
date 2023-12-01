@@ -2,19 +2,22 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "styled-components";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
+import SearchTodo from "./SearchTodo";
 
 const HeaderStyle = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  align-content: center;
   color: #3e978b;
   height: 50px;
   text-align: left;
-  width: 100%;
+  justify-content: space-between;
+  width: 99%;
   font-family: cursive;
   background: #beadfa;
   padding: 0 10px;
-  /* margin: 0 10px; */
 `;
 const BrandTitle = styled.h1`
   margin: 1px;
@@ -58,6 +61,7 @@ function Header({ api, setOpenSidebar }) {
             </Typography>
           </BrandTitle>
         </div>
+        <SearchTodo />
       </HeaderStyle>
     </>
   );

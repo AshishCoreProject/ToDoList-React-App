@@ -3,6 +3,8 @@ import TaskForm from "./TaskForm";
 import List from "./List";
 import { useTodo } from "../PostContext";
 import AddTask from "./AddTask";
+import { LinearProgress } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const ContentStyle = styled.div`
   display: flex;
@@ -14,10 +16,20 @@ const ContentStyle = styled.div`
   align-items: center;
 `;
 function MainContent() {
-  const { isAddTask, setIsAddTask } = useTodo();
+  const { isAddTask, setIsAddTask, inputQuery } = useTodo();
+
+  const [progress, setProgress] = useState("");
+
+  useEffect(() => {
+    setProgress(inputQuery);
+    setTimeout(() => {
+      setProgress("");
+    }, 2000);
+  }, [inputQuery]);
 
   return (
     <>
+      {progress && <LinearProgress color="success" />}
       <ContentStyle>
         {isAddTask ? (
           <TaskForm />

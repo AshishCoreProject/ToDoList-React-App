@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 
 function AppLayout() {
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState(true);
 
   const [springs, api] = useSpring(() => ({
     from: { x: 100 },

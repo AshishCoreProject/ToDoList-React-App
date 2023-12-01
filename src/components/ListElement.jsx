@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import AllOutIcon from "@mui/icons-material/AllOut";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -13,9 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import TaskForm from "./TaskForm";
-import { useState } from "react";
 import { useTodo } from "../PostContext";
 import { fetchDate } from "../services/fetchDate";
+import Snackbar from "@mui/joy/Snackbar";
+
+// import Button from "@mui/joy/Button";
 
 // eslint-disable-next-line react/prop-types
 function ListElement({
@@ -27,8 +30,9 @@ function ListElement({
   dueDate,
   dueMonth,
 }) {
-  const { handleDeleteTask, handleEditTask } = useTodo();
+  const { handleDeleteTask, handleEditTask, inputQuery } = useTodo();
   let [openForm, setOpenForm] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { thisDate, year, monthNum } = fetchDate();
   const currentDate = `${year}/${monthNum}/${thisDate}`;
@@ -62,6 +66,9 @@ function ListElement({
       return <CheckCircleIcon sx={{ color: " rgb(2 132 199);" }} />;
     if (priority === "P1")
       return <CheckCircleIcon sx={{ color: " rgb(225 29 72);" }} />;
+  }
+  function handleSnackBar() {
+    setIsOpen(true);
   }
 
   return (
@@ -104,11 +111,11 @@ function ListElement({
                   icon={handlePriority()}
                   color="success"
                   checkedIcon={handleCheckPriority()}
-                  // size="medium"
                   onChange={() => handleDeleteTask(id)}
+                  onClick={handleSnackBar}
                 />
               }
-              label={title}
+              label={inputQuery ? <strong>{title}</strong> : title}
             />
             <Button
               onClick={() => setOpenForm((value) => !value)}
@@ -170,6 +177,27 @@ function ListElement({
               />
             )}
           </Box>
+
+          {isOpen && (
+            <Snackbar
+              sx={{
+                fontFamily: "Montserrat",
+                fontSize: "16px",
+              }}
+              autoHideDuration={3000}
+              variant={"soft"}
+              color="success"
+              open={open}
+              size="md"
+              onClose={(event, reason) => {
+                if (reason === "clickaway") {
+                  return;
+                }
+              }}
+            >
+              Task successfully completed!
+            </Snackbar>
+          )}
         </Box>
       )}
     </Draggable>

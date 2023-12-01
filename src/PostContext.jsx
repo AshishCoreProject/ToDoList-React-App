@@ -9,6 +9,7 @@ const PostContext = createContext();
 function PostProvider({ children }) {
   const [projectList, setProjectList] = useState([]);
   const [isAddTask, setIsAddTask] = useState(false);
+  const [inputQuery, setInputQuery] = useState("");
   const [tasks, setTasks] = useState([
     {
       id: "5239",
@@ -28,7 +29,10 @@ function PostProvider({ children }) {
     },
   ]);
 
-  console.log(projectList);
+  function handleSearchQuery(searchInput) {
+    setInputQuery(searchInput);
+  }
+
   //Creating Due Date Login
   ////////////////////////////////////////////////////////////////
   useEffect(() => {
@@ -52,7 +56,7 @@ function PostProvider({ children }) {
   function handleDeleteTask(id) {
     setTimeout(() => {
       setTasks(tasks.filter((task) => task.id !== id));
-    }, 300);
+    }, 500);
   }
 
   function handleEditTask(
@@ -184,7 +188,6 @@ function PostProvider({ children }) {
       setProjectList(updatedProjectList);
     }
   }
-
   return (
     <PostContext.Provider
       value={{
@@ -192,6 +195,9 @@ function PostProvider({ children }) {
         setTasks: setTasks,
         isAddTask: isAddTask,
         setIsAddTask: setIsAddTask,
+        inputQuery: inputQuery,
+        // setInputQuery: setInputQuery,
+        handleSearchQuery: handleSearchQuery,
         handleAddTask: handleAddTask,
         handleDeleteTask: handleDeleteTask,
         handleEditTask: handleEditTask,

@@ -6,11 +6,22 @@ import ProjectListElement from "./ProjectListElement";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function ProjectList({ projectId, setProjectList }) {
-  const { projectList } = useTodo();
+  const { projectList, inputQuery } = useTodo();
 
   const project = projectList.find((element) => element.id === projectId);
   const projectSubList = project.projectTodo;
 
+  ///////////////////////////////////////////////////////////////////
+  const filterProjectList = projectSubList.filter((el) => {
+    const filterTitle = el.title.toLowerCase().includes(inputQuery);
+    const filterDescription = el.description.toLowerCase().includes(inputQuery);
+
+    if (inputQuery === "") {
+      return el;
+    } else {
+      return filterTitle || filterDescription;
+    }
+  });
   ///////////////////////////////////////////////////////////////////
   const droppables = Date.now().toString().slice(8, 12);
 
@@ -27,7 +38,7 @@ function ProjectList({ projectId, setProjectList }) {
         {(provided) => (
           <Box ref={provided.innerRef}>
             <ProjectTitle title={project.projectName} />
-            {projectSubList?.map((item, index) => (
+            {filterProjectList?.map((item, index) => (
               <ProjectListElement
                 key={item.id}
                 id={item.id}

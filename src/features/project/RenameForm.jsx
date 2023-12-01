@@ -50,7 +50,7 @@ function RenameForm({ projectId, projectName, handleClose }) {
           placeholder="Write the Project Name"
           type="text"
           value={renameProject}
-          autoFocus
+          autoFocus={true}
           onChange={(e) => setRenameProject(e.target.value)}
         />
         <Box

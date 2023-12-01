@@ -33,12 +33,14 @@ function AddProjectSideForm({ handleClose }) {
       setIsLengthExceeded(true);
       setProjectName(projectName.slice(0, 25));
     } else {
+      setIsLengthExceeded(false);
       setProjectName(e.target.value);
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    event.stopPropagation();
     const id = Date.now().toString().slice(9, 12);
 
     if (projectName) {
@@ -56,8 +58,7 @@ function AddProjectSideForm({ handleClose }) {
       <Form onSubmit={handleSubmit}>
         <Label>Name</Label>
         <Input
-          autoFocus
-          required
+          autoFocus={true}
           placeholder="Write the Project Name"
           type="text"
           value={projectName}

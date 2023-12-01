@@ -11,6 +11,7 @@ import Empty from "../data/empty.svg";
 import AddProjectSideForm from "../features/project/AddProjectSideForm";
 import MainProjectItem from "../features/project/MainProjectItem";
 import ListImg from "../data/list.svg";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 const ContentStyle = styled.div`
   display: flex;
@@ -65,6 +66,7 @@ const Modalstyle = {
 
 function Project() {
   const { projectList } = useTodo();
+  const [inputProjectQuery, setInputProjectQuery] = useState("");
   const isEmpty = projectList[0];
 
   const [open, setOpen] = useState(false);
@@ -76,6 +78,25 @@ function Project() {
     event.stopPropagation();
   }
 
+  function handleSearchInput(e) {
+    const lowercase = e.target.value.toLowerCase();
+    setInputProjectQuery(lowercase);
+  }
+
+  function handleClearSearch() {
+    setInputProjectQuery("");
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////
+  const filteredProjectList = projectList.filter((el) => {
+    const filterProject = el.projectName
+      .toLowerCase()
+      .includes(inputProjectQuery);
+
+    if (inputProjectQuery === "") return el;
+    else return filterProject;
+  });
+
   return (
     <>
       <ContentStyle>
@@ -83,10 +104,20 @@ function Project() {
         <Box sx={{ padding: "5px 0 20px 0" }}>
           <Input
             startDecorator={<SearchRoundedIcon />}
+            endDecorator={
+              inputProjectQuery && (
+                <CancelOutlinedIcon
+                  sx={{ color: "gray", fontSize: "20px" }}
+                  onClick={handleClearSearch}
+                />
+              )
+            }
             sx={searchStyle}
             name="Outlined"
             placeholder={"Search projects here..."}
             variant="outlined"
+            value={inputProjectQuery}
+            onChange={handleSearchInput}
           />
 
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -169,14 +200,12 @@ function Project() {
             >
               My Project
             </Box>
-            {projectList.map((projectItem) => (
-              <>
-                <MainProjectItem
-                  key={projectItem.id}
-                  projectId={projectItem.id}
-                  projectItem={projectItem}
-                />
-              </>
+            {filteredProjectList.map((projectItem) => (
+              <MainProjectItem
+                key={projectItem.id}
+                projectId={projectItem.id}
+                projectItem={projectItem}
+              />
             ))}
           </List>
         )}

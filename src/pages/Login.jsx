@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import UnderDevelopment from "../data/underProgress.svg";
+import { Box, Typography } from "@mui/material";
 const ContentStyle = styled.div`
   display: flex;
   height: 800px;
@@ -13,7 +15,27 @@ const ContentStyle = styled.div`
 function Login() {
   return (
     <ContentStyle>
-      <p> Login page</p>
+      <Box
+        sx={{
+          width: "600px",
+          height: "500px",
+          opacity: "60%",
+          padding: "30px  0",
+        }}
+      >
+        <Typography
+          sx={{
+            color: "gray",
+            fontFamily: "Montserrat",
+            fontSize: "28px",
+            fontWeight: "800 ",
+            textAlign: "center",
+          }}
+        >
+          Page Under Development
+        </Typography>
+        <img src={UnderDevelopment} />
+      </Box>
     </ContentStyle>
   );
 }

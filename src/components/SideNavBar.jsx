@@ -51,7 +51,7 @@ function SideNavBar() {
           </List>
 
           <List>
-            <Navlink to="/login">
+            <Navlink to="/signup">
               <P>
                 <UpcomingOutlinedIcon
                   sx={{
@@ -65,7 +65,7 @@ function SideNavBar() {
             </Navlink>
           </List>
           <List>
-            <Navlink to="/signup">
+            <Navlink to="/login">
               <P>
                 <LoginOutlinedIcon
                   sx={{
